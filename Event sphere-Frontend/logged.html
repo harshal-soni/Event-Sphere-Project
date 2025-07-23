@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>View Event Managers</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 30px;
+      background-color: #f7f7f7;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background-color: #fce4ec;
+    }
+    tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Logged-In Event Managers</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Manager Name</th>
+        <th>Organization</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th> 
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody id="managersList"></tbody>
+  </table>
+
+  <script>
+    const managers = JSON.parse(localStorage.getItem("eventManagers")) || [];
+    const listBody = document.getElementById("managersList");
+
+    managers.forEach((m, index) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${m.name}</td>
+        <td>${m.organization}</td>
+        <td>${m.email}</td>
+        <td>${m.phone}</td>
+        <td>${m.address || '—'}</td> 
+        <td>${m.timestamp}</td>
+      `;
+      listBody.appendChild(row);
+    });
+  </script>
+
+</body>
+</html>
