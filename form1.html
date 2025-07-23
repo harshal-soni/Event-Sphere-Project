@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event Sphere | Event Manager Sign In</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fce4ec, #ebedee);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .signin-container {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 16px;
+      padding: 30px 25px;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+    }
+
+    .signin-container h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 25px;
+      font-size: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #444;
+      font-size: 14px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      background-color: #fefefe;
+      color: #333;
+      cursor: text;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #7a5af8;
+    }
+
+    .checkbox {
+      display: flex;
+      align-items: center;
+      margin: 10px 0 20px 0;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .checkbox input {
+      margin-right: 8px;
+      cursor: pointer;
+    }
+
+    .checkbox label {
+      cursor: pointer;
+    }
+
+    .signin-btn {
+      width: 100%;
+      padding: 11px;
+      background-color: #7a5af8;
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .signin-btn:hover {
+      background-color: #5b3bf2;
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+    }
+
+    @media (max-width: 480px) {
+      .signin-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signin-container">
+
+
+
+    
+    <h1>Event Manager Sign In</h1>
+    <form id="managerform">
+      <div class="form-group">
+        <label for="managerName">Manager Name</label>
+        <input type="text" id="managerName" name="managerName" required />
+      </div>
+      <div class="form-group">
+        <label for="orgName">Organization</label>
+        <input type="text" id="orgName" name="orgName" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email ID</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone No.</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+      <div class="form-group">
+        <label for="securityCode">Security Code</label>
+        <input type="text" id="securityCode" name="securityCode" placeholder="E.g. TRUST2025" required />
+      </div>
+      <div class="checkbox">
+        <input type="checkbox" id="remember" />
+        <label for="remember">Remember Me</label>
+      </div>
+      <button type="submit" class="signin-btn">Sign In</button>
+      <p class="footer-note">Only trusted managers can access Event Sphere management section.</p>
+    </form>
+  </div>
+
+
+
+ 
+
+<script>
+  document.getElementById('managerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const location = e.target.location.value;
+
+    try {
+      const response = await fetch('http://localhost:3000/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, location })
+      });
+
+      const result = await response.json();
+      alert(result.message || 'Something went wrong!');
+    } catch (err) {
+      alert('Error connecting to server');
+    }
+  });
+</script>
+
+
+</body>
+</html>

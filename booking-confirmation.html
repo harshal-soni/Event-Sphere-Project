@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking Confirmation - Event Sphere</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #dfe9f3, #ffffff); 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .confirmation-box {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .logo {
+      width: 120px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: #28a745;
+      margin-bottom: 15px;
+    }
+
+    p {
+      margin: 8px 0;
+      color: #333333;
+      font-size: 16px;
+    }
+
+    .home-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+
+    .home-link:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 500px) {
+      .confirmation-box {
+        padding: 20px;
+      }
+
+      p {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="confirmation-box">
+    
+    <img src="WhatsApp Image 2025-06-22 at 17.07.24_5cfefab0.jpg" alt="Event Sphere Logo" class="logo" />
+
+    <h1>🎉 Booking Confirmed!</h1>
+    <p>Thank you for booking with Event Sphere.</p>
+    <div id="bookingDetails">
+    
+    </div>
+    <a href="event.html" class="home-link">Return to Home</a>
+  </div>
+
+  <script>
+    const bookingData = JSON.parse(localStorage.getItem("booking"));
+    const detailsContainer = document.getElementById("bookingDetails");
+
+    if (bookingData) {
+      detailsContainer.innerHTML = `
+        <p><strong>Name:</strong> ${bookingData.name}</p>
+        <p><strong>Event:</strong> ${bookingData.event}</p>
+        <p><strong>Date:</strong> ${bookingData.date}</p>
+      `;
+    } else {
+      detailsContainer.innerHTML = "<p>No booking data found.</p>";
+    }
+  </script>
+</body>
+</html>
