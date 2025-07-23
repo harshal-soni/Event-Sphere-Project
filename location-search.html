@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event Managers by Location</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f4f8;
+      padding: 30px;
+    }
+    h2 {
+      color: #2c3e50;
+    }
+    input, button {
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #fff;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Find Event Managers in Your Location</h2>
+  <input type="text" id="locationInput" placeholder="Enter location like Jaipur" />
+  <button onclick="getManagersByLocation()">Search</button>
+
+  <div id="managerList"></div>
+
+  <script>
+    async function getManagersByLocation() {
+      const location = document.getElementById('locationInput').value.trim();
+      const listDiv = document.getElementById('managerList');
+      listDiv.innerHTML = '';
+
+      if (!location) {
+        listDiv.innerHTML = '<p style="color: red;">Please enter a location.</p>';
+        return;
+      }
+
+      try {
+        const res = await fetch(http://localhost:3000/api/managers?location=${encodeURIComponent(location)});
+        const managers = await res.json();
+
+        if (managers.length === 0) {
+          listDiv.innerHTML = '<p>No managers found in this location.</p>';
+          return;
+        }
+
+        const ul = document.createElement('ul');
+        managers.forEach(mgr => {
+          const li = document.createElement('li');
+          li.innerHTML = <strong>Name:</strong> ${mgr.name} <br><strong>Email:</strong> ${mgr.email} <br><strong>Location:</strong> ${mgr.location};
+          ul.appendChild(li);
+        });
+
+        listDiv.appendChild(ul);
+      } catch (err) {
+        
+        listDiv.innerHTML = '<p style="color: red;">Error fetching data. Is your backend running?</p>';
+      }
+    }
+  </script>
+
+</body>
+</html>

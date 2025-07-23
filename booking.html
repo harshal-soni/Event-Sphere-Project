@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book a Service - Event Sphere</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      padding: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .booking-box {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 40px;
+      background-color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-bottom: 25px;
+      color: #333;
+      margin-top: -10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    input {
+      padding: 12px 18px;
+      margin: 10px 0;
+      border: 1.5px solid #bbb;
+      border-radius: 8px;
+      width: 100%;
+      font-size: 16px;
+      max-width: 300px;
+    }
+
+    button {
+      padding: 12px 18px;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 300px;
+      border: none;
+      border-radius: 8px;
+      background-color:  #2196f3;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color:rgb(13, 13, 247);
+      transform: scale(1.05);
+    }
+
+
+.booking-box img {
+      width: 150px;
+      height: auto;
+      margin-bottom: 20px;
+}
+  </style>
+</head>
+<body>
+
+  <div class="booking-box">
+
+<img src="WhatsApp Image 2025-06-22 at 17.07.24_5cfefab0.jpg" alt="Event Sphere Logo">
+    
+    <h2>Book Your Event</h2>
+
+    <form id="bookingForm">
+      <input type="text" id="name"      placeholder="Your Name" required>
+      <input type="text" id="event"       placeholder="Event Type" required>
+      <input type="date" required>
+      <input type="text"  id="date" placeholder="Location" required>
+      <button type="submit">Confirm Booking</button>
+    </form>
+  </div>
+
+<script>
+  document.getElementById("bookingForm").addEventListener("submit", function (e) {
+    e.preventDefault(); 
+
+    
+    const name = document.getElementById("name").value;
+    const event = document.getElementById("event").value;
+    const date = document.getElementById("date").value;
+
+    // Create booking data object
+    const bookingData = { name, event, date };
+
+    // Store it in localStorage
+    localStorage.setItem("booking", JSON.stringify(bookingData));
+
+    // Redirect to confirmation page
+    window.location.href = "booking-confirmation.html";
+  });
+</script>
+
+
+
+
+
+
+</body>
+</html>
